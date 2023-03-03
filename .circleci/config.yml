@@ -68,12 +68,12 @@ jobs:
           name: Install dependencias
           command: poetry install
       - run:
-          name: Activate venv
-          command: poetry shell
-      - run:
           name: Run tests
-          command: |
-            pytest
+          command: poetry run pytest
+      # - run:
+      #     name: Run tests
+      #     command: |
+      #       pytest
       - persist_to_workspace:
           root: .
           paths:
