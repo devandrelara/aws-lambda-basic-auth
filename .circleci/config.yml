@@ -65,8 +65,7 @@ jobs:
       - run:
         name: Download dependencies
         command: |
-            pip install --upgrade pip; \
-		        pip install poetry==1.1.15; \
+		        pip install poetry==1.1.15
 		        poetry install
       - run:
           name: Run tests
