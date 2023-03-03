@@ -1,6 +1,13 @@
 version: 2
-
+orbs:
+  poetry: talkiq/poetry@4.0.0
 jobs:
+
+  set-env:
+    executor: poetry/default
+    steps:
+      - checkout
+      - poetry/install
   plan-apply:
     working_directory: /tmp/project
     docker:
@@ -81,7 +88,10 @@ workflows:
   version: 2
   plan_approve_apply:
     jobs:
+      - set-env
       - test
+          requires:
+            - set-env
       - plan-apply:
           requires:
             - test
