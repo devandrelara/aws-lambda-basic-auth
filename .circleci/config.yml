@@ -52,7 +52,7 @@ jobs:
     
   test:
     docker:
-      - image: circleci/python:3.10.8
+      - image: circleci/python
     steps:
       - attach_workspace:
           at: .
