@@ -89,7 +89,7 @@ workflows:
   plan_approve_apply:
     jobs:
       - set-env
-      - test
+      - test:
           requires:
             - set-env
       - plan-apply:
