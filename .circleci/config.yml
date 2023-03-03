@@ -27,6 +27,7 @@ jobs:
       - run:
           name: terraform
           command: |
+            cd terraform
             terraform apply -auto-approve tfapply
       - persist_to_workspace:
           root: .
@@ -77,6 +78,6 @@ workflows:
       #     type: approval
       #     requires:
       #       - plan-destroy
-      - destroy:
-          requires:
-            - plan-destroy
+      # - destroy:
+      #     requires:
+      #       - plan-destroy
