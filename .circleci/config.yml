@@ -7,6 +7,7 @@ jobs:
       - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
     steps:
       - checkout
+        path: /tmp/project/terraform
       - run:
           name: terraform init & plan
           command: |
