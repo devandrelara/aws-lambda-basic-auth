@@ -3,12 +3,8 @@ orbs:
   poetry: talkiq/poetry@4.0.0
 jobs:
 
-  set-env:
-    executor: poetry/default
-    steps:
-      - checkout
-      - poetry/install
   plan-apply:
+    name: Plan Terraform resources
     working_directory: /tmp/project
     docker:
       - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
@@ -26,6 +22,7 @@ jobs:
             - .
 
   apply:
+    name: Apply Terraform resources
     docker:
       - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
     steps:
@@ -42,6 +39,7 @@ jobs:
             - .
 
   plan-destroy:
+    name: Plan Terraform destroy resources
     docker:
       - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
     steps:
@@ -58,13 +56,20 @@ jobs:
             - .
     
   test:
+    name: Run tests
     docker:
       - image: circleci/python
     steps:
       - attach_workspace:
           at: .
       - run:
-          name: pytest
+        name: Download dependencies
+        command: |
+            pip install --upgrade pip; \
+		        pip install poetry==1.1.15; \
+		        poetry install
+      - run:
+          name: Run tests
           command: |
             pytest
       - persist_to_workspace:
@@ -74,6 +79,7 @@ jobs:
 
 
   destroy:
+    name: Destroy Terraform resources
     docker:
       - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
     steps:
