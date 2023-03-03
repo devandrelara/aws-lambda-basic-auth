@@ -16,14 +16,14 @@ var/
 .installed.cfg
 *.egg
 *.zip
-
+*.pyc
 # Serverless directories
 .serverless
 
 # Terraform
 # Local .terraform directories
 **/.terraform/*
-
+**/.terraform*
 # .tfstate files
 *.tfstate
 *.tfstate.*
