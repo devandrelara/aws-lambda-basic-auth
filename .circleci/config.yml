@@ -56,12 +56,11 @@ jobs:
             - .
     
   test:
-    name: Run unit tests
+    working_directory: /tmp/project
     docker:
       - image: circleci/python
     steps:
-      - attach_workspace:
-          at: .
+      - checkout
       - run:
           name: Install poetry
           command: pip install poetry==1.1.15
