@@ -94,9 +94,7 @@ workflows:
   version: 2
   plan_approve_apply:
     jobs:
-      - test:
-          requires:
-            - set-env
+      - test
       - plan-apply:
           requires:
             - test
