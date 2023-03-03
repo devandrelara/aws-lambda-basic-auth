@@ -66,7 +66,7 @@ jobs:
           command: pip install poetry==1.1.15
       - run:
           name: Install dependencias
-          command: poetry install
+          command: poetry install && poetry shell
       - run:
           name: Run tests
           command: |
