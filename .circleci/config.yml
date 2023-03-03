@@ -56,7 +56,7 @@ jobs:
             - .
     
   test:
-    name: Run tests
+    name: Run unit tests
     docker:
       - image: circleci/python
     steps:
