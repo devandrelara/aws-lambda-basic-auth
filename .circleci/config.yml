@@ -43,11 +43,28 @@ jobs:
       - run:
           name: terraform create destroy plan
           command: |
-            terraform plan -destroy -out tfdestroy -var-file terraform.tfvars
+            cd terraform
+            terraform plan -destroy -out tfdestroy
       - persist_to_workspace:
           root: .
           paths:
             - .
+    
+  test:
+    docker:
+      - image: circleci/python:3.10.8
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: pytest
+          command: |
+            pytest
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+
 
   destroy:
     docker:
@@ -58,12 +75,16 @@ jobs:
       - run:
           name: terraform destroy
           command: |
+            cd terraform
             terraform apply -auto-approve tfdestroy
 workflows:
   version: 2
   plan_approve_apply:
     jobs:
+      - test
       - plan-apply
+        requires:
+          - test
       # - hold-apply:
       #     type: approval
       #     requires:
@@ -74,10 +95,10 @@ workflows:
       - plan-destroy:
           requires:
             - apply
-      # - hold-destroy:
-      #     type: approval
-      #     requires:
-      #       - plan-destroy
-      # - destroy:
-      #     requires:
-      #       - plan-destroy
+      - hold-destroy:
+          type: approval
+          requires:
+            - plan-destroy
+      - destroy:
+          requires:
+            - plan-destroy
