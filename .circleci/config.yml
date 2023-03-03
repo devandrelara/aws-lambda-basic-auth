@@ -82,9 +82,9 @@ workflows:
   plan_approve_apply:
     jobs:
       - test
-      - plan-apply
-        requires:
-          - test
+      - plan-apply:
+          requires:
+            - test
       # - hold-apply:
       #     type: approval
       #     requires:
