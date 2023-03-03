@@ -63,11 +63,11 @@ jobs:
       - attach_workspace:
           at: .
       - run:
-        name: Install poetry
-        command: pip install poetry==1.1.15
+          name: Install poetry
+          command: pip install poetry==1.1.15
       - run:
-        name: Install dependencias
-        command: poetry install
+          name: Install dependencias
+          command: poetry install
       - run:
           name: Run tests
           command: |
