@@ -107,13 +107,13 @@ workflows:
       - apply:
           requires:
             - plan-apply
-      - plan-destroy:
-          requires:
-            - apply
-      - hold-destroy:
-          type: approval
-          requires:
-            - plan-destroy
-      - destroy:
-          requires:
-            - plan-destroy
+      # - plan-destroy:
+      #     requires:
+      #       - apply
+      # - hold-destroy:
+      #     type: approval
+      #     requires:
+      #       - plan-destroy
+      # - destroy:
+      #     requires:
+      #       - plan-destroy
