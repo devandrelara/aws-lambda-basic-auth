@@ -12,3 +12,4 @@ def test_webhook_lambda():
     
     assert response['statusCode'] == 200
     assert message == 'This is the webhook endpoint!'
+    assert True
